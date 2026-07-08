@@ -12,43 +12,32 @@
                 @lang('auth.admin_login')
             </h1>
 
-         <form method="POST" action="{{ route('login') }}">
-    @csrf
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
 
-    <div class="mb-4">
-        <label>@lang('auth.email')</label>
+                <div class="mb-4">
+                    <label>@lang('auth.email')</label>
 
-        <input
-            type="email"
-            name="email"
-            value="{{ old('email') }}"
-            class="w-full border rounded-lg p-3 mt-2"
-        >
+                    <input type="email" name="email" value="{{ old('email') }}" class="w-full border rounded-lg p-3 mt-2">
 
-        @error('email')
-            <p class="text-red-500 mt-2">
-                {{ $message }}
-            </p>
-        @enderror
-    </div>
+                    @error('email')
+                        <p class="text-red-500 mt-2">
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
 
-    <div class="mb-6">
-        <label>@lang('auth.password')</label>
+                <div class="mb-6">
+                    <label>@lang('auth.password')</label>
 
-        <input
-            type="password"
-            name="password"
-            class="w-full border rounded-lg p-3 mt-2"
-        >
-    </div>
+                    <input type="password" name="password" class="w-full border rounded-lg p-3 mt-2">
+                </div>
 
-    <button
-        class="w-full bg-blue-600 text-white p-3 rounded-lg"
-    >
-        @lang('auth.login_btn')
-    </button>
+                <button class="w-full bg-blue-600 text-white p-3 rounded-lg">
+                    @lang('auth.login_btn')
+                </button>
 
-</form>
+            </form>
 
         </div>
 

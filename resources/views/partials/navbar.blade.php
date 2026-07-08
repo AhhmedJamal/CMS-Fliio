@@ -1,4 +1,4 @@
-<nav class="bg-white shadow px-6 py-4 flex justify-between items-center">
+<nav class="shadow px-6 py-4 flex justify-between items-center h-[8%]">
 
     <h1 class="text-xl font-semibold">
         @lang('dashboard.title')

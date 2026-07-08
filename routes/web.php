@@ -25,11 +25,10 @@ Route::middleware('auth')->group(function () {
 
         
   // Products Routes (CRUD كامل)
-    Route::resource('products', ProductController::class);
-
+    Route::resource('products', ProductController::class)->names('products');
+    Route::get('products/', [ProductController::class, 'index'])->name('products');
     Route::post('products/{product}/toggle-status', [ProductController::class, 'toggleStatus'])
         ->name('products.toggle-status');
-
 
     Route::get('/categories', [CategoryController::class, 'index'])
         ->name('categories');

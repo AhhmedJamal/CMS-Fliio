@@ -4,7 +4,6 @@
 
 @section('content')
 
-<div class="container mx-auto p-6">
     <h2 class="text-3xl font-bold mb-6">@lang('dashboard.welcome_settings')</h2>
 
     <!-- عرض الأخطاء -->
@@ -25,247 +24,217 @@
         </div>
     @endif
 
-    <!-- بطاقة الإعدادات -->
-    <div class="bg-white rounded-xl shadow-lg p-8">
+    <!-- الفورم -->
+    <form action="{{ route('settings.update') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <div class="flex items-center justify-between  mb-6">
+            <h3 class="text-2xl font-bold ">
+                إعدادات المتجر
+            </h3>
+        </div>
+        <!-- ========================================== -->
+        <!-- زر الحفظ -->
+        <!-- ========================================== -->
+        <div class="flex justify-end items-center gap-4 sticky top-2">
+            <button type="submit"
+                class="bg-primary hover:bg-primary/90 hover:scale-95 text-white font-semibold px-8 py-3 rounded-lg transition duration-200 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                حفظ التغييرات
+            </button>
+        </div>
+        <!-- ========================================== -->
+        <!-- القسم 1: معلومات المتجر -->
+        <!-- ========================================== -->
+        <div class="mb-8">
+            <h4 class="font-semibold text-lg  mb-4   pr-3">
+                معلومات المتجر
+            </h4>
 
-        <h3 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">
-            إعدادات المتجر
-        </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- اسم المتجر -->
+                <div>
+                    <label class="block text-sm font-medium  mb-2">
+                        اسم المتجر <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" name="store_name"
+                        class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                        value="{{ $settings->get('store_name') }}" placeholder="أدخل اسم المتجر">
+                </div>
 
-        <!-- الفورم -->
-        <form action="{{ route('settings.update') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
+                <!-- الشعار -->
+                <div>
+                    <label class="block text-sm font-medium  mb-2">
+                        الشعار الحالي
+                    </label>
+                    @if ($settings->get('store_logo'))
+                        <div class="mb-3 p-2 border border-gray-200 rounded-lg inline-block">
+                            <img src="{{ $settings->get('store_logo') }}" alt="Logo" class="size-24 object-contain">
+                        </div>
+                    @else
+                        <p class="text-sm text-gray-400 mb-2">لا يوجد شعار</p>
+                    @endif
 
-            <!-- ========================================== -->
-            <!-- القسم 1: معلومات المتجر -->
-            <!-- ========================================== -->
-            <div class="mb-8">
-                <h4 class="font-semibold text-lg text-gray-700 mb-4 border-r-4 border-regal-blue pr-3">
-                    معلومات المتجر
-                </h4>
+                    <label class="block text-sm font-medium  mb-2">
+                        تغيير الشعار
+                    </label>
+                    <input type="file" name="store_logo" accept="image/*"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    <p class="text-xs text-gray-500 mt-1">
+                        الصيغ المدعومة: jpg, jpeg, png, gif, webp (الحد الأقصى: 2MB)
+                    </p>
+                </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- اسم المتجر -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            اسم المتجر <span class="text-red-500">*</span>
-                        </label>
-                        <input type="text" name="store_name"
-                            class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-regal-blue focus:border-transparent transition"
-                            value="{{ $settings->get('store_name') }}"
-                            placeholder="أدخل اسم المتجر">
-                    </div>
+                <!-- الفافيكون -->
+                <div>
+                    <label class="block text-sm font-medium  mb-2">
+                        الفافيكون الحالي
+                    </label>
+                    @if ($settings->get('store_favicon'))
+                        <div class="mb-3 p-2 border border-gray-200 rounded-lg inline-block">
+                            <img src="{{ $settings->get('store_favicon') }}" alt="Favicon" class="size-24 object-contain">
+                        </div>
+                    @else
+                        <p class="text-sm text-gray-400 mb-2">لا يوجد فافيكون</p>
+                    @endif
 
-                    <!-- الشعار -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            الشعار الحالي
-                        </label>
-                        @if ($settings->get('store_logo'))
-                            <div class="mb-3 p-2 border border-gray-200 rounded-lg inline-block">
-                                <img src="{{ $settings->get('store_logo') }}"
-                                    alt="Logo"
-                                    class="size-24 object-contain">
-                            </div>
-                        @else
-                            <p class="text-sm text-gray-400 mb-2">لا يوجد شعار</p>
-                        @endif
-
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            تغيير الشعار
-                        </label>
-                        <input type="file" name="store_logo" accept="image/*"
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-regal-blue focus:border-transparent transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                        <p class="text-xs text-gray-500 mt-1">
-                            الصيغ المدعومة: jpg, jpeg, png, gif, webp (الحد الأقصى: 2MB)
-                        </p>
-                    </div>
-
-                    <!-- الفافيكون -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            الفافيكون الحالي
-                        </label>
-                        @if ($settings->get('store_favicon'))
-                            <div class="mb-3 p-2 border border-gray-200 rounded-lg inline-block">
-                                <img src="{{ $settings->get('store_favicon') }}"
-                                    alt="Favicon"
-                                    class="size-24 object-contain">
-                            </div>
-                        @else
-                            <p class="text-sm text-gray-400 mb-2">لا يوجد فافيكون</p>
-                        @endif
-
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            تغيير الفافيكون
-                        </label>
-                        <input type="file" name="store_favicon" accept="image/*"
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-regal-blue focus:border-transparent transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                        <p class="text-xs text-gray-500 mt-1">
-                            الصيغ المدعومة: jpg, jpeg, png, svg, ico (الحد الأقصى: 512KB)
-                        </p>
-                    </div>
+                    <label class="block text-sm font-medium  mb-2">
+                        تغيير الفافيكون
+                    </label>
+                    <input type="file" name="store_favicon" accept="image/*"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    <p class="text-xs text-gray-500 mt-1">
+                        الصيغ المدعومة: jpg, jpeg, png, svg, ico (الحد الأقصى: 512KB)
+                    </p>
                 </div>
             </div>
+        </div>
 
-            <!-- ========================================== -->
-            <!-- القسم 2: الألوان -->
-            <!-- ========================================== -->
-            <div class="mb-8">
-                <h4 class="font-semibold text-lg text-gray-700 mb-4 border-r-4 border-regal-blue pr-3">
-                    الألوان
-                </h4>
+        <!-- ========================================== -->
+        <!-- القسم 2: الألوان -->
+        <!-- ========================================== -->
+        <div class="mb-8">
+            <h4 class="font-semibold text-lg  mb-4   pr-3">
+                الألوان
+            </h4>
 
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                    <!-- اللون الأساسي -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2 text-center">
-                            الأساسي
-                        </label>
-                        <input type="color" name="primary_color"
-                            class="w-full h-14 border border-gray-300 rounded-lg cursor-pointer hover:scale-105 transition"
-                            value="{{ $settings->get('primary_color', '#073D42') }}">
-                        <p class="text-xs text-center text-gray-500 mt-1">
-                            {{ $settings->get('primary_color', '#073D42') }}
-                        </p>
-                    </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- اللون الأساسي -->
+                <div>
+                    <label class="block text-sm font-medium  mb-2 text-center">
+                        الأساسي
+                    </label>
+                    <input type="color" name="primary_color"
+                        class="w-full h-14 border border-gray-300 rounded-lg cursor-pointer hover:scale-105 transition"
+                        value="{{ $settings->get('primary_color', '#073D42') }}">
+                    <p class="text-xs text-center text-gray-500 mt-1">
+                        {{ $settings->get('primary_color', '#073D42') }}
+                    </p>
+                </div>
 
-                    <!-- اللون الثانوي -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2 text-center">
-                            الثانوي
-                        </label>
-                        <input type="color" name="secondary_color"
-                            class="w-full h-14 border border-gray-300 rounded-lg cursor-pointer hover:scale-105 transition"
-                            value="{{ $settings->get('secondary_color', '#10B981') }}">
-                        <p class="text-xs text-center text-gray-500 mt-1">
-                            {{ $settings->get('secondary_color', '#10B981') }}
-                        </p>
-                    </div>
+                <!-- اللون الثانوي -->
+                <div>
+                    <label class="block text-sm font-medium  mb-2 text-center">
+                        الثانوي
+                    </label>
+                    <input type="color" name="secondary_color"
+                        class="w-full h-14 border border-gray-300 rounded-lg cursor-pointer hover:scale-105 transition"
+                        value="{{ $settings->get('secondary_color', '#10B981') }}">
+                    <p class="text-xs text-center text-gray-500 mt-1">
+                        {{ $settings->get('secondary_color', '#10B981') }}
+                    </p>
+                </div>
 
-                    <!-- لون الخلفية -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2 text-center">
-                            الخلفية
-                        </label>
-                        <input type="color" name="background_color"
-                            class="w-full h-14 border border-gray-300 rounded-lg cursor-pointer hover:scale-105 transition"
-                            value="{{ $settings->get('background_color', '#FFFFFF') }}">
-                        <p class="text-xs text-center text-gray-500 mt-1">
-                            {{ $settings->get('background_color', '#FFFFFF') }}
-                        </p>
-                    </div>
+                <!-- لون الخلفية -->
+                <div>
+                    <label class="block text-sm font-medium  mb-2 text-center">
+                        الخلفية
+                    </label>
+                    <input type="color" name="background_color"
+                        class="w-full h-14 border border-gray-300 rounded-lg cursor-pointer hover:scale-105 transition"
+                        value="{{ $settings->get('background_color', '#FFFFFF') }}">
+                    <p class="text-xs text-center text-gray-500 mt-1">
+                        {{ $settings->get('background_color', '#FFFFFF') }}
+                    </p>
+                </div>
 
-                    <!-- لون النص -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2 text-center">
-                            النص
-                        </label>
-                        <input type="color" name="text_color"
-                            class="w-full h-14 border border-gray-300 rounded-lg cursor-pointer hover:scale-105 transition"
-                            value="{{ $settings->get('text_color', '#1F2937') }}">
-                        <p class="text-xs text-center text-gray-500 mt-1">
-                            {{ $settings->get('text_color', '#1F2937') }}
-                        </p>
-                    </div>
-
-                    <!-- لون التمييز -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2 text-center">
-                            التمييز
-                        </label>
-                        <input type="color" name="accent_color"
-                            class="w-full h-14 border border-gray-300 rounded-lg cursor-pointer hover:scale-105 transition"
-                            value="{{ $settings->get('accent_color', '#F59E0B') }}">
-                        <p class="text-xs text-center text-gray-500 mt-1">
-                            {{ $settings->get('accent_color', '#F59E0B') }}
-                        </p>
-                    </div>
+                <!-- لون النص -->
+                <div>
+                    <label class="block text-sm font-medium  mb-2 text-center">
+                        النص
+                    </label>
+                    <input type="color" name="text_color"
+                        class="w-full h-14 border border-gray-300 rounded-lg cursor-pointer hover:scale-105 transition"
+                        value="{{ $settings->get('text_color', '#1F2937') }}">
+                    <p class="text-xs text-center text-gray-500 mt-1">
+                        {{ $settings->get('text_color', '#1F2937') }}
+                    </p>
                 </div>
             </div>
+        </div>
 
-            <!-- ========================================== -->
-            <!-- القسم 3: معلومات التواصل -->
-            <!-- ========================================== -->
-            <div class="mb-8">
-                <h4 class="font-semibold text-lg text-gray-700 mb-4 border-r-4 border-blue-600 pr-3">
-                    معلومات التواصل
-                </h4>
+        <!-- ========================================== -->
+        <!-- القسم 3: معلومات التواصل -->
+        <!-- ========================================== -->
+        <div class="mb-8">
+            <h4 class="font-semibold text-lg  mb-4  border-blue-600 pr-3">
+                معلومات التواصل
+            </h4>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- الهاتف -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            رقم الهاتف
-                        </label>
-                        <input type="text" name="phone"
-                            class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-regal-blue focus:border-transparent transition"
-                            value="{{ $settings->get('phone') }}"
-                            placeholder="مثال: 0123456789">
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- الهاتف -->
+                <div>
+                    <label class="block text-sm font-medium  mb-2">
+                        رقم الهاتف
+                    </label>
+                    <input type="text" name="phone"
+                        class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                        value="{{ $settings->get('phone') }}" placeholder="مثال: 0123456789">
+                </div>
 
-                    <!-- البريد الإلكتروني -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            البريد الإلكتروني
-                        </label>
-                        <input type="email" name="email"
-                            class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-regal-blue focus:border-transparent transition"
-                            value="{{ $settings->get('email') }}"
-                            placeholder="info@store.com">
-                    </div>
+                <!-- البريد الإلكتروني -->
+                <div>
+                    <label class="block text-sm font-medium  mb-2">
+                        البريد الإلكتروني
+                    </label>
+                    <input type="email" name="email"
+                        class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                        value="{{ $settings->get('email') }}" placeholder="info@store.com">
+                </div>
 
-                    <!-- العنوان -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            العنوان
-                        </label>
-                        <input type="text" name="address"
-                            class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-regal-blue focus:border-transparent transition"
-                            value="{{ $settings->get('address') }}"
-                            placeholder="العنوان بالكامل">
-                    </div>
+                <!-- العنوان -->
+                <div>
+                    <label class="block text-sm font-medium  mb-2">
+                        العنوان
+                    </label>
+                    <input type="text" name="address"
+                        class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                        value="{{ $settings->get('address') }}" placeholder="العنوان بالكامل">
+                </div>
 
-                    <!-- فيسبوك -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            فيسبوك
-                        </label>
-                        <input type="url" name="facebook"
-                            class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-regal-blue focus:border-transparent transition"
-                            value="{{ $settings->get('facebook') }}"
-                            placeholder="https://facebook.com/store">
-                    </div>
+                <!-- فيسبوك -->
+                <div>
+                    <label class="block text-sm font-medium  mb-2">
+                        فيسبوك
+                    </label>
+                    <input type="url" name="facebook"
+                        class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                        value="{{ $settings->get('facebook') }}" placeholder="https://facebook.com/store">
+                </div>
 
-                    <!-- انستغرام -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            انستغرام
-                        </label>
-                        <input type="url" name="instagram"
-                            class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-regal-blue focus:border-transparent transition"
-                            value="{{ $settings->get('instagram') }}"
-                            placeholder="https://instagram.com/store">
-                    </div>
+                <!-- انستغرام -->
+                <div>
+                    <label class="block text-sm font-medium  mb-2">
+                        انستغرام
+                    </label>
+                    <input type="url" name="instagram"
+                        class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                        value="{{ $settings->get('instagram') }}" placeholder="https://instagram.com/store">
                 </div>
             </div>
-
-            <!-- ========================================== -->
-            <!-- زر الحفظ -->
-            <!-- ========================================== -->
-            <div class="flex justify-end items-center gap-4 pt-6 border-t border-gray-200">
-                <button type="submit"
-                    class="bg-regal-blue hover:bg-regal-blue/90 hover:scale-95 text-white font-semibold px-8 py-3 rounded-lg transition duration-200 flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    حفظ التغييرات
-                </button>
-            </div>
-
-        </form>
-    </div>
-</div>
+        </div>
+    </form>
 
 @endsection

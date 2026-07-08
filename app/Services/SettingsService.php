@@ -38,7 +38,6 @@ class SettingsService
             'secondary' => $this->get('secondary_color', '#10B981'),
             'background' => $this->get('background_color', '#FFFFFF'),
             'text' => $this->get('text_color', '#1F2937'),
-            'accent' => $this->get('accent_color', '#F59E0B'),
         ];
     }
 

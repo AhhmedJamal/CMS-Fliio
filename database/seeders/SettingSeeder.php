@@ -24,7 +24,6 @@ class SettingSeeder extends Seeder
             ['key' => 'secondary_color', 'value' => '#10B981', 'group' => 'colors'],
             ['key' => 'background_color', 'value' => '#FFFFFF', 'group' => 'colors'],
             ['key' => 'text_color', 'value' => '#1F2937', 'group' => 'colors'],
-            ['key' => 'accent_color', 'value' => '#F59E0B', 'group' => 'colors'],
 
             // تواصل
             ['key' => 'phone', 'value' => '+20123456789', 'group' => 'contact'],

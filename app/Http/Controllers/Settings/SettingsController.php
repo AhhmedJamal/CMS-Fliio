@@ -31,10 +31,12 @@ class SettingsController extends Controller
             'store_name' => 'required|string|max:255',
             'store_logo' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'primary_color' => 'nullable|string|max:7',
+            'background_color'=> 'nullable|string|max:7',
+            'text_color'=> 'nullable|string|max:7',
         ]);
 
         // 👈 حفظ النصوص
-        $fields = ['store_name', 'primary_color'];
+        $fields = ['store_name', 'primary_color', 'background_color', 'text_color'];
         foreach ($fields as $field) {
             if ($request->has($field)) {
                 Setting::updateOrCreate(
@@ -73,7 +75,7 @@ class SettingsController extends Controller
     {
         $groups = [
             'general' => ['store_name', 'store_tagline', 'store_logo', 'store_favicon'],
-            'colors' => ['primary_color', 'secondary_color', 'background_color', 'text_color', 'accent_color'],
+            'colors' => ['primary_color', 'secondary_color', 'background_color', 'text_color'],
         ];
 
         foreach ($groups as $group => $fields) {
