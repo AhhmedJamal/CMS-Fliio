@@ -19,7 +19,6 @@ return new class extends Migration
             $table->decimal('compare_price', 10, 2)->nullable(); // السعر قبل الخصم
             $table->integer('quantity')->default(0);
             $table->string('image')->nullable(); // رابط الصورة من Cloudinary
-            $table->string('image_public_id')->nullable(); // ID الصورة في Cloudinary
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

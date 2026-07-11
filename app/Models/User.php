@@ -47,4 +47,35 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+       /**
+     * ✅ التحقق من أن المستخدم هو Admin
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * ✅ التحقق من أن المستخدم عادي
+     */
+    public function isUser(): bool
+    {
+        return $this->role === 'user';
+    }
+
+    /**
+     * ✅ التحقق من أن المستخدم مدير (Manager)
+     */
+    public function isManager(): bool
+    {
+        return $this->role === 'manager';
+    }
+
+    /**
+     * ✅ التحقق من أن المستخدم لديه صلاحية معينة
+     */
+    public function hasRole(string $role): bool
+    {
+        return $this->role === $role;
+    }
 }
