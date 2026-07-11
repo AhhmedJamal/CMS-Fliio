@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+
     <title>@yield('title')</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -19,7 +21,7 @@
 
         @include('partials.sidebar')
 
-        <div class="p-4 flex-1 scrollbar-thumb-primary  "
+        <div class="p-6 flex-1 scrollbar-thumb-primary  "
             style="background-color: {{ $settings->get('primary_color') }}; color:{{ $settings->get('text_color') }} ">
             <div class="flex-1 rounded-2xl overflow-y-auto h-full"
                 style="background-color: {{ $settings->get('background_color') }}">

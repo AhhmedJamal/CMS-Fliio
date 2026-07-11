@@ -3,124 +3,181 @@
 @section('title', __('dashboard.products'))
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1><i class="fas fa-box"></i> قائمة المنتجات</h1>
-    <a href="{{ route('products.create') }}" class="btn btn-primary">
-        <i class="fas fa-plus"></i> إضافة منتج جديد
-    </a>
-</div>
+    {{-- Header --}}
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800">
+                <i class="fas fa-box text-primary"></i> {{ __('products.title') }}
+            </h1>
+            <p class="text-sm text-gray-500 mt-1">{{ __('products.management') }}</p>
+        </div>
+        {{-- Search & Filter --}}
+        <div class="bg-white rounded-lg p-1 border border-gray-200 w-1/2">
+            <form method="GET" action="{{ route('products.index') }}" class="flex flex-wrap gap-3">
+                <div class="flex-1 min-w-[200px]">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="{{ __('products.search_placeholder') }}"
+                        class="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                </div>
+                <button type="submit" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg transition">
+                    <i class="fas fa-search"></i> {{ __('products.search') }}
+                </button>
+                <a href="{{ route('products.index') }}"
+                    class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition">
+                    <i class="fas fa-redo"></i> {{ __('products.reset') }}
+                </a>
+            </form>
+        </div>
+        <a href="{{ route('products.create') }}"
+            class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
+            <i class="fas fa-plus"></i>
+            {{ __('products.create_product') }}
+        </a>
+    </div>
+    {{-- Stats Cards --}}
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">{{ __('products.total') }}</p>
+                    <p class="text-2xl font-bold text-gray-800">{{ $products->total() }}</p>
+                </div>
+                <div class="bg-primary/10 p-3 rounded-full">
+                    <i class="fas fa-box text-primary"></i>
+                </div>
+            </div>
+        </div>
 
-<div class="table-responsive">
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>الصورة</th>
-                <th>اسم المنتج</th>
-                <th>السعر</th>
-                <th>الكمية</th>
-                <th>الحالة</th>
-                <th>الإجراءات</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($products as $product)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>
-                    <img src="{{ $product->thumbnail }}" 
-                         alt="{{ $product->name }}" 
-                         width="60" 
-                         height="60" 
-                         class="rounded object-fit-cover"
-                         loading="lazy">
-                </td>
-                <td>{{ $product->name }}</td>
-                <td>
-                    <strong>{{ number_format($product->price, 2) }} جنيه</strong>
-                    @if($product->compare_price)
-                        <br>
-                        <small class="text-muted text-decoration-line-through">
-                            {{ number_format($product->compare_price, 2) }} جنيه
-                        </small>
-                    @endif
-                </td>
-                <td>
-                    <span class="badge {{ $product->quantity > 0 ? 'bg-success' : 'bg-danger' }}">
-                        {{ $product->quantity }}
-                    </span>
-                </td>
-                <td>
-                    <button class="btn btn-sm {{ $product->is_active ? 'btn-success' : 'btn-secondary' }} toggle-status"
-                            data-id="{{ $product->id }}">
-                        {{ $product->is_active ? 'نشط' : 'غير نشط' }}
-                    </button>
-                </td>
-                <td>
-                    <div class="btn-group" role="group">
-                        {{-- <a href="{{ route('products.show', $product) }}" class="btn btn-sm btn-info"> --}}
-                        <a href="#" class="btn btn-sm btn-info">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        {{-- <a href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-warning"> --}}
-                        <a href="#" class="btn btn-sm btn-warning">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        {{-- <form action="{{ route('products.destroy', $product) }}" method="POST"  --}}
-                        <form action="#" method="POST" 
-                              onsubmit="return confirm('هل أنت متأكد من حذف هذا المنتج؟')"
-                              style="display:inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
+        <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">{{ __('products.active') }}</p>
+                    <p class="text-2xl font-bold text-gray-800">{{ $products->where('is_active', true)->count() }}</p>
+                </div>
+                <div class="bg-green-100 p-3 rounded-full">
+                    <i class="fas fa-check-circle text-green-600"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">{{ __('products.out_of_stock') }}</p>
+                    <p class="text-2xl font-bold text-gray-800">{{ $products->where('quantity', 0)->count() }}</p>
+                </div>
+                <div class="bg-red-100 p-3 rounded-full">
+                    <i class="fas fa-exclamation-triangle text-red-600"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">{{ __('products.total_value') }}</p>
+                    <p class="text-2xl font-bold text-gray-800">{{ number_format($products->sum('price'), 2) }} {{ __('products.currency') }}</p>
+                </div>
+                <div class="bg-yellow-100 p-3 rounded-full">
+                    <i class="fas fa-coins text-yellow-600"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Products Grid --}}
+    @if ($products->count() > 0)
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            @foreach ($products as $product)
+                <div
+                    class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition duration-300">
+                    {{-- Product Image --}}
+                    <div class="relative h-80 bg-gray-100">
+                        @if ($product->image)
+                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                                class="w-full h-full object-cover">
+                        @else
+                            <div class="w-full h-full flex items-center justify-center">
+                                <i class="fas fa-image text-4xl text-gray-300"></i>
+                            </div>
+                        @endif
+
+                        {{-- Status Badge --}}
+                        <div class="absolute top-2 left-2">
+                            <span
+                                class="flex items-center gap-2 px-2 py-1 text-xs font-medium rounded {{ $product->is_active ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-600' }}">
+                                @if ($product->is_active)
+                                    <i class="fa-solid fa-circle text-[8px]"></i>
+                                    <span>{{ __('products.status_active') }}</span>
+                                @else
+                                    <i class="fa-solid fa-circle text-[8px]"></i>
+                                    <span>{{ __('products.status_inactive') }}</span>
+                                @endif
+                            </span>
+                        </div>
+
+
                     </div>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="7" class="text-center py-4">
-                    <i class="fas fa-box-open fa-3x text-muted"></i>
-                    <p class="mt-2">لا توجد منتجات حتى الآن</p>
-                    <a href="{{ route('products.create') }}" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> أضف أول منتج
-                    </a>
-                </td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
 
-{{ $products->links() }}
+                    {{-- Product Info --}}
+                    <div class="p-4">
+
+                        <div class="flex justify-between items-center pb-2 border-b border-gray-100">
+
+                            <h3 class="text-gray-800 font-semibold text-lg mb-1 truncate">{{ $product->name }}</h3>
+                            {{-- Stock Badge --}}
+                            <span
+                                class="px-2 py-1 text-xs font-medium rounded-full {{ $product->quantity > 0 ? 'bg-primary/10 text-primary' : 'bg-red-100 text-red-600' }}">
+                                <i class="fas fa-boxes"></i> {{ $product->quantity }}
+                            </span>
+                        </div>
+
+                        {{-- Price --}}
+                        <div class="flex items-end gap-2 mt-2 mb-3 relative">
+                            <span class="text-xl font-bold text-primary">{{ number_format($product->price, 2) }}
+                                {{ __('products.currency') }}</span>
+                            @if ($product->compare_price)
+                                <span
+                                    class="text-sm text-gray-400 line-through ">{{ number_format($product->compare_price, 2) }}
+                                    {{ __('products.currency') }}</span>
+                                <span
+                                    class="absolute rtl:left-0 ltr:right-0 text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full">-{{ $product->discount_percentage }}%</span>
+                            @endif
+                        </div>
+                        {{-- Actions --}}
+                        <div class="grid grid-cols-2 items-center gap-2 pt-3 border-t border-gray-100">
+                            <a href="{{ route('products.edit', $product) }}"
+                                class="flex-1 bg-gray-100 hover:bg-green-100 hover:text-green-500 text-primary text-center px-3 py-1.5 rounded-lg text-sm transition border border-gray-200">
+                                <i class="fas fa-edit"></i> {{ __('products.edit') }}
+                            </a>
+                            <form action="{{ route('products.destroy', $product->id) }}" method="POST"
+                                onsubmit="return confirm('{{ __('products.confirm_delete') }}')" class="flex-1">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="w-full bg-gray-100 hover:bg-red-100 hover:text-red-500 text-primary text-center px-3 py-1.5 rounded-lg text-sm transition border border-gray-200">
+                                    <i class="fas fa-trash"></i> {{ __('products.delete') }}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- Pagination --}}
+        <div class="mt-6">
+            {{ $products->links() }}
+        </div>
+    @else
+        {{-- Empty State --}}
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
+            <i class="fas fa-box-open text-6xl text-gray-300 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-700 mb-2">{{ __('products.no_products') }}</h3>
+            <p class="text-gray-500 mb-4">{{ __('products.no_products_desc') }}</p>
+            <a href="{{ route('products.create') }}"
+                class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg transition inline-flex items-center gap-2">
+                <i class="fas fa-plus"></i> {{ __('products.add_first') }}
+            </a>
+        </div>
+    @endif
 @endsection
-
-@push('scripts')
-<script>
-    // تغيير حالة المنتج (AJAX)
-    document.querySelectorAll('.toggle-status').forEach(button => {
-        button.addEventListener('click', function() {
-            const productId = this.dataset.id;
-            const btn = this;
-            
-            fetch(`/products/${productId}/toggle-status`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    btn.textContent = data.is_active ? 'نشط' : 'غير نشط';
-                    btn.className = `btn btn-sm ${data.is_active ? 'btn-success' : 'btn-secondary'}`;
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    });
-</script>
-@endpush      

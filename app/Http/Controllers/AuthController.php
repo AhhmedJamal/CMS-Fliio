@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
@@ -15,8 +15,12 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        if (Auth::attempt($request->only('email', 'password'))) {
-
+        if (
+            Auth::attempt(
+                $request->only('email', 'password'),
+                true 
+            )
+        ) {
             $request->session()->regenerate();
 
             return redirect()->route('dashboard');

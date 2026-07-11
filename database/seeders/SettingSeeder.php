@@ -16,8 +16,8 @@ class SettingSeeder extends Seeder
             // معلومات عامة
             ['key' => 'store_name', 'value' => 'LUVBAG.', 'group' => 'general'],
             ['key' => 'store_tagline', 'value' => 'أفضل المنتجات', 'group' => 'general'],
-            ['key' => 'store_logo', 'value' => 'https://res.cloudinary.com/dtrrqx2i0/image/upload/v1783412569/Screenshot_2026-07-07_112340_esn7hw.png', 'group' => 'general'],
-            ['key' => 'store_favicon', 'value' => 'https://res.cloudinary.com/dtrrqx2i0/image/upload/v1783412569/Screenshot_2026-07-07_112340_esn7hw.png', 'group' => 'general'],
+            ['key' => 'store_logo', 'value' => 'https://res.cloudinary.com/dtrrqx2i0/image/upload/v1783768613/Screenshot_2025-08-28_163727_flcle7.png', 'group' => 'general'],
+            ['key' => 'store_favicon', 'value' => 'https://res.cloudinary.com/dtrrqx2i0/image/upload/v1783768613/Screenshot_2025-08-28_163727_flcle7.png', 'group' => 'general'],
 
             // الألوان
             ['key' => 'primary_color', 'value' => '#073D42', 'group' => 'colors'],

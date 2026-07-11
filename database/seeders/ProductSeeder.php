@@ -15,9 +15,9 @@ class ProductSeeder extends Seeder
     {
         $products = [
 
-            ['name' => 'Bag 1', 'description' => 'Description 1', 'price' => 100, 'compare_price' => 150, 'quantity' => 10, 'image' => 'https://res.cloudinary.com/dtrrqx2i0/image/upload/v1776171195/cld-sample-5.jpg', 'image_public_id' => 'image1', 'is_active' => true],
-            ['name' => 'Bag 2', 'description' => 'Description 2', 'price' => 200, 'compare_price' => 250, 'quantity' => 20, 'image' => 'https://res.cloudinary.com/dtrrqx2i0/image/upload/v1776171188/samples/chair-and-coffee-table.jpg', 'image_public_id' => 'image2', 'is_active' => true],
-            ['name' => 'Bag 3', 'description' => 'Description 3', 'price' => 300, 'compare_price' => 350, 'quantity' => 30, 'image' => 'https://res.cloudinary.com/dtrrqx2i0/image/upload/v1776171182/samples/shoe.jpg', 'image_public_id' => 'image3', 'is_active' => true],
+            ['name' => 'Bag 1', 'description' => 'Description 1', 'price' => 100, 'compare_price' => 150, 'quantity' => 10, 'image' => 'https://res.cloudinary.com/dtrrqx2i0/image/upload/v1776171195/cld-sample-5.jpg', 'is_active' => true],
+            ['name' => 'Bag 2', 'description' => 'Description 2', 'price' => 200, 'compare_price' => 250, 'quantity' => 20, 'image' => 'https://res.cloudinary.com/dtrrqx2i0/image/upload/v1776171188/samples/chair-and-coffee-table.jpg', 'is_active' => true],
+            ['name' => 'Bag 3', 'description' => 'Description 3', 'price' => 300, 'compare_price' => 350, 'quantity' => 30, 'image' => 'https://res.cloudinary.com/dtrrqx2i0/image/upload/v1776171182/samples/shoe.jpg', 'is_active' => true],
         ];
 
         foreach ($products as $product) {

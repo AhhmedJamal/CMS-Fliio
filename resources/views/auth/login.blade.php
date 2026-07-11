@@ -18,7 +18,8 @@
                 <div class="mb-4">
                     <label>@lang('auth.email')</label>
 
-                    <input type="email" name="email" value="{{ old('email') }}" class="w-full border rounded-lg p-3 mt-2">
+                    <input type="email" name="email" value="{{ old('email') }}"
+                        class="w-full border rounded-lg p-3 mt-2">
 
                     @error('email')
                         <p class="text-red-500 mt-2">
