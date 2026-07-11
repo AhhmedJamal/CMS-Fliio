@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Category\CategoryController;
-use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\LanguageController;
-use App\Http\Controllers\Order\OrderController;
-use App\Http\Controllers\Product\ProductController;
-use App\Http\Controllers\Settings\SettingsController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,17 +24,32 @@ Route::middleware('auth')->group(function () {
         ->name('dashboard');
 
         
-  // Products Routes (CRUD كامل)
-    Route::resource('products', ProductController::class)->names('products');
-    Route::get('products/', [ProductController::class, 'index'])->name('products');
-    Route::post('products/{product}/toggle-status', [ProductController::class, 'toggleStatus'])
-        ->name('products.toggle-status');
+    Route::get('products/', [ProductController::class, 'index'])->name('products.index');
+    Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+
 
     Route::get('/categories', [CategoryController::class, 'index'])
-        ->name('categories');
+        ->name('categories.index');
+    Route::post('/categories', [CategoryController::class, 'store'])
+        ->name('categories.store');
+    Route::get('/categories/create', [CategoryController::class, 'create'])
+        ->name('categories.create');
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])
+        ->name('categories.edit');
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])
+        ->name('categories.update');
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])
+        ->name('categories.destroy');
+    
+
 
     Route::get('/orders', [OrderController::class, 'index'])
         ->name('orders');
+
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
     Route::match(['POST', 'PUT'], '/settings', [SettingsController::class, 'update'])->name('settings.update');

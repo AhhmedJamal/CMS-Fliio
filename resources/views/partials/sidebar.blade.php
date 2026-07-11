@@ -10,12 +10,12 @@
             ],
             'products' => [
                 'name' => __('dashboard.products'),
-                'route' => route('products'),
+                'route' => route('products.index'),
                 'icon' => 'fa-solid fa-box',
             ],
             'categories' => [
                 'name' => __('dashboard.categories'),
-                'route' => route('categories'),
+                'route' => route('categories.index'),
                 'icon' => 'fa-solid fa-layer-group',
             ],
             'orders' => [
@@ -36,16 +36,16 @@
                 class="w-full h-auto object-contain rounded-[4px]">
         </div>
         <nav>
-            @foreach ($links as $link)
+            @foreach ($links as $key => $link)
                 <a href="{{ $link['route'] }}"
-                    class="block px-6 py-3 hover:translate-x-2 transition-all mb-2 rounded-full relative {{ $currentRoute === strtolower($link['name']) ? 'bg-[#ffffff] text-primary ' : 'text-white hover:bg-[#ffffff6e] ' }}">
+                    class="block px-6 py-3 hover:translate-x-2 transition-all mb-2 rounded-full relative {{ str_starts_with($currentRoute, $key) ? 'bg-[#ffffff] text-primary ' : 'text-white hover:bg-[#ffffff6e] ' }}">
                     <i class="{{ $link['icon'] }}"></i> {{ $link['name'] }}
                 </a>
 
             @endforeach
         </nav>
     </div>
-    <div class="profile flex items-center justify-between px-1.5">
+    <div class="profile flex items-center gap-3 px-1.5">
         <div class="avatar">
             <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}" alt=""
                 class="rounded-full size-12">
@@ -55,19 +55,5 @@
             <h3 class="role capitalize text-[12px] text-neutral-400">{{ Auth::user()->role }}</h3>
         </div>
     </div>
-    {{-- <a href="{{ route('logout') }}" class="logout">
-        <i class="fa-solid fa-right-from-bracket"></i>
-    </a> --}}
 </aside>
-<style>
-    /* .active-link::before {
-        content: '';
-        position: absolute;
-        right: -28px;
-        top: 50%;
-        transform: translateY(-50%);
-        border-style: solid;
-        border-width: 40px 60px 40px 0;
-        border-color: transparent white transparent transparent;
-    } */
-</style>
+

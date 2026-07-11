@@ -27,7 +27,9 @@ class ProductRequest extends FormRequest
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'compare_price' => 'nullable|numeric|min:0',
+            'category_id' => 'required|exists:categories,id',
             'quantity' => 'nullable|numeric|min:0',
+            'is_active' => 'nullable|boolean',
             'image' => 'nullable|image|max:2048',
         ];
     }
@@ -43,6 +45,7 @@ class ProductRequest extends FormRequest
             'quantity.min' => 'الكمية لا يمكن أن تكون أقل من 0',
             'image.image' => 'الملف يجب أن يكون صورة',
             'image.max' => 'حجم الصورة لا يتجاوز 2 ميجابايت',
+            'category_id.exists' => 'التصنيف المحدد غير موجود',
         ];
     }
 }

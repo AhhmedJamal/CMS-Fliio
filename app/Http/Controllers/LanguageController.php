@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
@@ -13,7 +13,6 @@ class LanguageController extends Controller
         }
 
         session(['locale' => $locale]);
-        // dd(session('locale'));
 
         return back();
     }
