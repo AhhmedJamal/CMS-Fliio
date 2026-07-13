@@ -6,6 +6,7 @@ return [
     'create_product' => 'Add New Product',
     'total' => 'Total Products',
     'active' => 'Active Products',
+    'disactive' => 'Inactive Products',
     'out_of_stock' => 'Out of Stock',
     'total_value' => 'Total Value',
     'search_placeholder' => 'Search for a product...',

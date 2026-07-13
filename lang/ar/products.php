@@ -6,6 +6,7 @@ return [
     'create_product' => 'إضافة منتج جديد',
     'total' => 'إجمالي المنتجات',
     'active' => 'المنتجات النشطة',
+    'disactive' => 'المنتجات غير النشطة',
     'out_of_stock' => 'منتجات نفدت',
     'total_value' => 'إجمالي القيمة',
     'search_placeholder' => 'بحث عن منتج...',
