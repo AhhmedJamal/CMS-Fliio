@@ -48,7 +48,14 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/orders', [OrderController::class, 'index'])
-        ->name('orders');
+        ->name('orders.index');
+    Route::get('/orders/create', [OrderController::class, 'create'])
+        ->name('orders.create');
+    Route::post('/orders', [OrderController::class, 'store'])
+        ->name('orders.store');
+    Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])
+        ->name('orders.edit');
+
 
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');

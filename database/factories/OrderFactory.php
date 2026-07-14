@@ -27,7 +27,7 @@ class OrderFactory extends Factory
             'address' => $this->faker->address,
             'payment_method' => $this->faker->randomElement(['cash_on_delivery', 'card', 'wallet']),
             'notes' => $this->faker->optional()->text,
-            'discount' => $this->faker->optional()->numberBetween(0, 100),
+            'discount' => $this->faker->numberBetween(0, 100),
             'total_price' => $this->faker->numberBetween(100, 1000),
             'status' => $this->faker->randomElement(['pending', 'processing', 'shipped', 'delivered', 'cancelled']),
         ];

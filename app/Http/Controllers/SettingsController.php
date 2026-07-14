@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 
 class SettingsController extends Controller
 {
-    protected $settingsService;
+    protected SettingsService $settingsService;
 
     public function __construct(SettingsService $settingsService)
     {

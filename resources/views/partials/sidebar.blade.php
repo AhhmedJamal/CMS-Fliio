@@ -20,7 +20,7 @@
             ],
             'orders' => [
                 'name' => __('dashboard.orders'),
-                'route' => route('orders'),
+                'route' => route('orders.index'),
                 'icon' => 'fa-solid fa-cart-shopping',
             ],
             'settings' => [
