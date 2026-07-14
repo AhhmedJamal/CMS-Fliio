@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Order extends Model
 {
@@ -22,7 +23,23 @@ class Order extends Model
         'total_price',
         'status',
     ];
+    protected static function booted(): void
+    {
+        static::creating(function (Order $order) {
+            if (empty($order->order_code)) {
+                $order->order_code = self::generateOrderCode();
+            }
+        });
+    }
 
+    public static function generateOrderCode(): string
+    {
+        do {
+            $code = 'ORD-' . now()->format('Ymd') . '-' . strtoupper(Str::random(5));
+        } while (self::where('order_code', $code)->exists());
+
+        return $code;
+    }
     public function customer()
     {
         return $this->belongsTo(Customer::class);
