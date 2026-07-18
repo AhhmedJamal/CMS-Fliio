@@ -14,7 +14,7 @@ class CustomerController extends Controller
     {
 
         $customers = Customer::paginate(10);
-        return view('customers.index' , compact('customers'));
+        return view('customers.index', compact('customers'));
     }
 
     /**
@@ -22,7 +22,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customers.create');
     }
 
     /**
@@ -30,7 +30,19 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'notes' => 'nullable',
+
+        ]);
+        //    dd($validator);
+        Customer::create($validator);
+        return redirect()->route('customers.index')
+            ->with('success', __('customers.customer_created_successfully'));
     }
 
     /**
@@ -38,7 +50,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('customers.show', compact('customer'));
     }
 
     /**
@@ -46,7 +58,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('customers.edit', compact('customer'));
     }
 
     /**
@@ -54,7 +66,18 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $validator = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'notes' => 'nullable',
+        ]);
+    
+        Customer::findOrFail($customer->id)->update($validator);
+        return redirect()->route('customers.index')
+            ->with('success', __('customers.customer_updated_successfully'));
     }
 
     /**
@@ -62,6 +85,9 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        Customer::findOrFail($customer->id)->delete();
+
+        return redirect()->route('customers.index')
+            ->with('success', __('customers.customer_deleted_successfully'));
     }
 }

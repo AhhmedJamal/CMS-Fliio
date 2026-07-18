@@ -28,11 +28,6 @@
                 'route' => route('orders.index'),
                 'icon' => 'fa-solid fa-cart-shopping',
             ],
-            'Customization' => [
-                'name' => __('dashboard.Customization'),
-                'route' => route('Customization.index'),
-                'icon' => 'fa-solid fa-edit',
-            ],
             'settings' => [
                 'name' => __('dashboard.settings'),
                 'route' => route('settings'),

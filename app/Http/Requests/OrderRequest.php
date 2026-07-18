@@ -23,18 +23,21 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'customer_name' => 'required|string|min:3|max:255',
-            'phone'         => 'required|string|min:9|max:15',
-            'city'          => 'required|string|min:2|max:100',
-            'address'       => 'required|string|min:5|max:255',
+            'customer_type' => 'required|in:existing,new',
+            'customer_id' => 'required_if:customer_type,existing|exists:customers,id',
 
-            'products'               => 'required|array|min:1',
-            'products.*.product_id'  => 'required|exists:products,id',
-            'products.*.quantity'    => 'required|integer|min:1',
+            'customer_name' => 'required_if:customer_type,new|string|max:255',
+            'phone' => 'required_if:customer_type,new|string|min:9|max:15',
+            'city' => 'required_if:customer_type,new|string|min:2|max:100',
+            'address' => 'required_if:customer_type,new|string|min:5|max:255',
+
+            'products' => 'required|array|min:1',
+            'products.*.product_id' => 'required|exists:products,id',
+            'products.*.quantity' => 'required|integer|min:1',
 
             'payment_method' => 'required|in:cash_on_delivery,card,wallet',
-            'discount'       => 'nullable|numeric|min:0',
-            'notes'          => 'nullable|string|max:1000',
+            'discount' => 'nullable|numeric|min:0',
+            'notes' => 'nullable|string|max:1000',
         ];
     }
 
@@ -42,26 +45,32 @@ class OrderRequest extends FormRequest
     {
         return [
             'customer_name.required' => __('orders.name_required'),
-            'customer_name.min'      => __('orders.name_min'),
-            'customer_name.max'      => __('orders.name_max'),
+            'customer_name.min' => __('orders.name_min'),
+            'customer_name.max' => __('orders.name_max'),
 
-            'phone.required' => __('orders.phone_required'),
-            'phone.min'      => __('orders.phone_min'),
-            'phone.max'      => __('orders.phone_max'),
+            'customer_id.required_if' => __('orders.customer_id_required'),
+            'customer_id.exists' => __('orders.customer_id_exists'),
 
-            'city.required' => __('orders.city_required'),
+            'customer_name.required_if' => __('orders.name_required'),
+            'customer_name.max' => __('orders.name_max'),
 
-            'address.required' => __('orders.address_required'),
-            'address.min'      => __('orders.address_min'),
-            'address.max'      => __('orders.address_max'),
+            'phone.required_if' => __('orders.phone_required'),
+            'phone.min' => __('orders.phone_min'),
+            'phone.max' => __('orders.phone_max'),
+
+            'city.required_if' => __('orders.city_required'),
+
+            'address.required_if' => __('orders.address_required'),
+            'address.min' => __('orders.address_min'),
+            'address.max' => __('orders.address_max'),
 
             'products.required' => __('orders.products_required'),
-            'products.min'      => __('orders.products_min'),
+            'products.min' => __('orders.products_min'),
 
             'products.*.product_id.required' => __('orders.product_id_required'),
-            'products.*.product_id.exists'   => __('orders.product_id_exists'),
-            'products.*.quantity.required'   => __('orders.quantity_required'),
-            'products.*.quantity.min'        => __('orders.quantity_min'),
+            'products.*.product_id.exists' => __('orders.product_id_exists'),
+            'products.*.quantity.required' => __('orders.quantity_required'),
+            'products.*.quantity.min' => __('orders.quantity_min'),
         ];
     }
 }

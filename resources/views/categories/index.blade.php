@@ -127,8 +127,8 @@
                     {{-- Category Info --}}
                     <div class="p-3 flex flex-col justify-between w-[60%]">
                         <div>
-                            <div class="flex justify-between items-start pb-2 ">
-                                <div>
+                            <div class="flex justify-between items-start pb-2">
+                                <div >
                                     <h3 class="text-gray-800 font-semibold text-lg">{{ $category->name }}</h3>
                                 </div>
                                 <div class="flex items-center gap-1">

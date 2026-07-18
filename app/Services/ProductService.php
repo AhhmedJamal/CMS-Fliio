@@ -76,7 +76,7 @@ class ProductService
     private function generateUniqueSlug($name)
     {
         $slug = Str::slug($name);
-        $count = Product::where('slug', 'like', $slug . '%')->count();
+        $count = Product::where('name', 'like', $slug . '%')->count();
         return $count > 0 ? $slug . '-' . ($count + 1) : $slug;
     }
 

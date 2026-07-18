@@ -61,4 +61,9 @@ return [
     'order_not_found' => 'Order not found',
     'order_updated' => 'Order updated successfully',
     'order_deleted' => 'Order deleted successfully',
+    'select_customer'=>' select customer ',
+    'customer_type'=>'customer type ',
+    'existing_customer'=>'existing customer ',
+    'new_customer'=>'new customer '
+
 ];
