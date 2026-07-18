@@ -123,7 +123,7 @@
 
                         <div class="flex justify-between items-center pb-2 border-b border-gray-100">
 
-                            <h3 class="text-gray-800 font-semibold text-lg mb-1 truncate">{{ $product->name }}</h3>
+                            <h3 class="text-gray-800 font-semibold text-lg mb-1 truncate w-[75%]">{{ $product->name }}</h3>
                             {{-- Stock Badge --}}
                             <span
                                 class="px-2 py-1 text-xs font-medium rounded-full {{ $product->quantity > 0 ? 'bg-primary/10 text-primary' : 'bg-red-100 text-red-600' }}">

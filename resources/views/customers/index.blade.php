@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('title', __('dashboard.orders'))
 @section('content')
-    <div class="flex gap-6">
+    <div class="flex justify-between items-center gap-6 mb-4">
         <div class="card">
             <div class="flex items-center gap-3 mb-4">
                 <i
@@ -11,15 +11,13 @@
                 </div>
             </div>
         </div>
+
+        <a href="{{ route('customers.create') }}"
+            class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-xl hover:bg-primary-hover transition">
+            <i class="fas fa-plus"></i>
+            <span>{{ __('customers.add_customer') }}</span>
+        </a>
     </div>
-
-
-
-    <form action="{{ route('customers.store') }}" method="POST" class="space-y-5">
-        @csrf
-        @include('customers._form')
-    </form>
-
 
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div class="overflow-x-auto">

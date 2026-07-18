@@ -60,4 +60,8 @@ return [
     'order_not_found' => 'لم يتم العثور على الطلب',
     'order_updated' => 'تم تحديث الطلب بنجاح',
     'order_deleted' => 'تم حذف الطلب بنجاح',
+    'select_customer'=>' اختيار العميل ',
+    'customer_type'=>'نوع العميل ',
+    'existing_customer'=>'عميل مسجل ',
+    'new_customer'=>'عميل جديد '
 ];
