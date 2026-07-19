@@ -2,13 +2,11 @@
 
 namespace App\Services;
 
-use App\Http\Requests\OrderRequest;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
-use Request;
+
 
 class OrderService
 {
@@ -88,13 +86,15 @@ class OrderService
     private function addOrderItems(Order $order, array $products)
     {
         foreach ($products as $item) {
-            $price = $item['price'];
+            $product = Product::findOrFail($item['product_id']);
+            $price = $product->price;
             $quantity = $item['quantity'];
             $order->items()->create([
                 'product_id' => $item['product_id'],
+                'product_name' => $product->name,
                 'quantity' => $quantity,
                 'price' => $price,
-                'total' => $price * $quantity,
+                'total_price' => $price * $quantity,
             ]);
         }
     }

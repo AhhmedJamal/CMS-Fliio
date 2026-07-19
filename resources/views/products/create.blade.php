@@ -12,7 +12,7 @@
             </h1>
             <a href="{{ route('products.index') }}" class="text-sm font-medium px-4 py-2 rounded-lg transition hover:scale-95"
                 style="color: {{ $settings->get('text_color', '#1F2937') }}; border: 1px solid {{ $settings->get('text_color', '#1F2937') }}30">
-                <i class="fa-solid fa-arrow-left"></i> {{ __('products.back_to_list') }}
+                <i class="fa-solid fa-arrow-left"></i> {{ __('app.back_to_list') }}
             </a>
         </div>
 
@@ -28,7 +28,7 @@
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium mb-2"
                             style="color: {{ $settings->get('text_color', '#1F2937') }}">
-                            {{ __('products.name') }} <span class="text-red-500">*</span>
+                            {{ __('app.name') }} <span class="text-red-500">*</span>
                         </label>
                         <input type="text" name="name" value="{{ old('name') }}"
                             class="w-full rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 transition"
@@ -36,7 +36,7 @@
                                   background-color: {{ $settings->get('background_color', '#FFFFFF') }};
                                   color: {{ $settings->get('text_color', '#1F2937') }};
                                   focus:ring-color: {{ $settings->get('primary_color', '#073D42') }}"
-                            placeholder="{{ __('products.name') }}">
+                            placeholder="{{ __('app.name') }}">
                         @error('name')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -46,7 +46,7 @@
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium mb-2"
                             style="color: {{ $settings->get('text_color', '#1F2937') }}">
-                            {{ __('products.description') }}
+                            {{ __('app.description') }}
                         </label>
                         <textarea name="description" rows="4"
                             class="w-full rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 transition"
@@ -54,7 +54,7 @@
                                      background-color: {{ $settings->get('background_color', '#FFFFFF') }};
                                      color: {{ $settings->get('text_color', '#1F2937') }};
                                      focus:ring-color: {{ $settings->get('primary_color', '#073D42') }}"
-                            placeholder="{{ __('products.description') }}">{{ old('description') }}</textarea>
+                            placeholder="{{ __('app.description') }}">{{ old('description') }}</textarea>
                         @error('description')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -64,7 +64,7 @@
                     <div>
                         <label class="block text-sm font-medium mb-2"
                             style="color: {{ $settings->get('text_color', '#1F2937') }}">
-                            {{ __('products.price') }} <span class="text-red-500">*</span>
+                            {{ __('app.price') }} <span class="text-red-500">*</span>
                         </label>
                         <input type="number" step="0.01" name="price" value="{{ old('price') }}"
                             class="w-full rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 transition"
@@ -100,7 +100,7 @@
                     <div>
                         <label class="block text-sm font-medium mb-2"
                             style="color: {{ $settings->get('text_color', '#1F2937') }}">
-                            {{ __('products.quantity') }} <span class="text-red-500">*</span>
+                            {{ __('app.quantity') }} <span class="text-red-500">*</span>
                         </label>
                         <input type="number" name="quantity" value="{{ old('quantity') }}"
                             class="w-full rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 transition"
@@ -114,7 +114,7 @@
                         @enderror
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('products.category') }}</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('app.category') }}</label>
                         <select name="category_id"
                             class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent @error('category_id') border-red-500 @enderror">
                             <option value="">{{ __('products.no_category') }}</option>
@@ -133,7 +133,7 @@
                     <div>
                         <label class="block text-sm font-medium mb-2"
                             style="color: {{ $settings->get('text_color', '#1F2937') }}">
-                            {{ __('products.image') }}
+                            {{ __('app.image') }}
                         </label>
                         <input type="file" name="image"
                             class="w-full rounded-lg px-3 py-2 focus:outline-none focus:ring-2 transition"
@@ -161,13 +161,13 @@
                     style="border-top: 1px solid {{ $settings->get('text_color', '#1F2937') }}10">
                     <button type="submit" class="text-white font-semibold px-8 py-2.5 rounded-lg transition hover:scale-95"
                         style="background-color: {{ $settings->get('primary_color', '#073D42') }}">
-                        {{ __('products.submit') }}
+                        {{ __('app.submit') }}
                     </button>
                     <a href="{{ route('products.index') }}" class="font-medium px-6 py-2.5 rounded-lg border transition"
                         style="color: {{ $settings->get('text_color', '#1F2937') }};
                           border-color: {{ $settings->get('text_color', '#1F2937') }}30;
                           hover:background-color: {{ $settings->get('primary_color', '#073D42') }}10">
-                        {{ __('products.cancel') }}
+                        {{ __('app.cancel') }}
                     </a>
                 </div>
             </form>

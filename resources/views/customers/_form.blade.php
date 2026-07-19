@@ -2,18 +2,18 @@
     {{-- Name --}}
     <div>
         <label class="block mb-2 text-sm font-medium text-gray-700">
-            {{ __('customers.name') }}
+            {{ __('app.name') }}
         </label>
 
         <input type="text" name="name" required value="{{ $customer->name ?? '' }}"
             class="w-full rounded-lg border border-gray-300 px-4 py-2.5 shadow-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
-            placeholder="{{ __('customers.name') }}">
+            placeholder="{{ __('app.name') }}">
     </div>
 
     {{-- Email --}}
     <div>
         <label class="block mb-2 text-sm font-medium text-gray-700">
-            {{ __('customers.email') }}
+            {{ __('app.email') }}
         </label>
 
         <input type="email" name="email" value="{{ $customer->email ?? '' }}"
@@ -25,7 +25,7 @@
     <div class="flex flex-col gap-5">
         <div>
             <label class="block mb-2 text-sm font-medium text-gray-700">
-                {{ __('customers.phone') }}
+                {{ __('app.phone') }}
             </label>
 
             <input type="text" name="phone" value="{{ $customer->phone ?? '' }}"
@@ -36,35 +36,35 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-0">
             <div>
                 <label class="block mb-2 text-sm font-medium text-gray-700">
-                    {{ __('customers.city') }}
+                    {{ __('app.city') }}
                 </label>
 
                 <input type="text" name="city" required value="{{ $customer->city ?? '' }}"
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 shadow-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
-                    placeholder="{{ __('customers.city') }}">
+                    placeholder="{{ __('app.city') }}">
             </div>
 
             {{-- Address --}}
             <div>
                 <label class="block mb-2 text-sm font-medium text-gray-700">
-                    {{ __('customers.address') }}
+                    {{ __('app.address') }}
                 </label>
 
                 <input type="text" name="address" value="{{ $customer->address ?? '' }}"
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 shadow-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
-                    placeholder="{{ __('customers.address') }}">
+                    placeholder="{{ __('app.address') }}">
             </div>
         </div>
     </div>
     {{-- Notes --}}
     <div class="md:col-span-1">
         <label class="block mb-2 text-sm font-medium text-gray-700">
-            {{ __('customers.notes') }}
+            {{ __('app.notes') }}
         </label>
 
         <textarea name="notes" rows="5"
             class="w-full rounded-lg border border-gray-300 px-4 py-2.5 shadow-sm focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
-            placeholder="{{ __('customers.notes') }}">{{ $customer->notes ?? '' }}</textarea>
+            placeholder="{{ __('app.notes') }}">{{ $customer->notes ?? '' }}</textarea>
     </div>
 </div>
 

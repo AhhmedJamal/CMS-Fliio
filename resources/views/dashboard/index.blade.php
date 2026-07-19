@@ -50,7 +50,7 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm text-gray-500">{{ __('products.total_value') }}</p>
-                    <p class="text-2xl font-bold text-gray-800">{{ number_format($products->sum('price'), 2) }} {{ __('products.currency') }}</p>
+                    <p class="text-2xl font-bold text-gray-800">{{ number_format($products->sum('price'), 2) }} {{ __('app.currency') }}</p>
                 </div>
                 <div class="bg-yellow-100 p-3 rounded-full">
                     <i class="fas fa-coins text-yellow-600"></i>

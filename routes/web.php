@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('products/', [ProductController::class, 'index'])->name('products.index');
     Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('products', [ProductController::class, 'store'])->name('products.store');
-    Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('app.edit');
     Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/categories/create', [CategoryController::class, 'create'])
         ->name('categories.create');
     Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])
-        ->name('categories.edit');
+        ->name('app.edit');
     Route::put('/categories/{category}', [CategoryController::class, 'update'])
         ->name('categories.update');
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])
@@ -67,11 +67,21 @@ Route::middleware('auth')->group(function () {
         ->name('orders.create');
     Route::post('/orders', [OrderController::class, 'store'])
         ->name('orders.store');
+    Route::get('/orders/{order}/show', [OrderController::class, 'show'])
+        ->name('orders.show');
     Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])
         ->name('orders.edit');
 
+    Route::get('customizers', [CustomizationController::class, 'index'])->name('customizations.index');
+    Route::get('customizations/create', [CustomizationController::class, 'create'])->name('customizations.create');
+    Route::post('customizations', [CustomizationController::class, 'store'])->name('customizations.store');
+    Route::get('customizations/{customizer}/edit', [CustomizationController::class, 'edit'])->name('customizations.edit');
+    Route::put('customizations/{customizer}', [CustomizationController::class, 'update'])->name('customizations.update');
+    Route::delete('customizations/{customizer}', [CustomizationController::class, 'destroy'])->name('customizations.destroy');
+
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
     Route::match(['POST', 'PUT'], '/settings', [SettingsController::class, 'update'])->name('settings.update');
+
     Route::get('/language/{locale}', [LanguageController::class, 'switch'])
         ->name('language.switch');
 

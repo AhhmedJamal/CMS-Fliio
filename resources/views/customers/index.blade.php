@@ -25,23 +25,23 @@
                 <thead class="bg-gray-50 border-b border-gray-200">
                     <tr>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                            {{ __('customers.name') }}
+                            {{ __('app.name') }}
                         </th>
 
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                            {{ __('customers.email') }}
+                            {{ __('app.email') }}
                         </th>
 
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                            {{ __('customers.phone') }}
+                            {{ __('app.phone') }}
                         </th>
 
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                            {{ __('customers.address') }}
+                            {{ __('app.address') }}
                         </th>
 
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                            {{ __('customers.notes') }}
+                            {{ __('app.notes') }}
                         </th>
 
                         <th class="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">
@@ -83,7 +83,7 @@
                                     </a>
 
                                     <form action="{{ route('customers.destroy', $customer) }}" method="POST"
-                                        onsubmit="return confirm('{{ __('customers.confirm_delete') }}')">
+                                        onsubmit="return confirm('{{ __('app.confirm_delete') }}')">
                                         @csrf
                                         @method('DELETE')
 

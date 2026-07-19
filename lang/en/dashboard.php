@@ -17,4 +17,7 @@ return [
     'welcome_settings' => 'Welcome Settings',
     'customers' => 'Customers',
     'welcome_customers' => 'Welcome Customers',
+    "customizations" => 'Customizations',
+    "welcome_customizations" => 'Welcome Customizations',
+
 ];

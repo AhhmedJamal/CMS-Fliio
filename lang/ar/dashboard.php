@@ -17,4 +17,7 @@ return [
     'welcome_settings' => 'مرحبًا بك في الإعدادات',
     'customers' => 'العملاء',
     'welcome_customers' => 'مرحبًا بك في العملاء',
+    "customizations" => 'التخصيص',
+    "welcome_customizations" => 'مرحبًا بك في التخصيص',
+
 ];

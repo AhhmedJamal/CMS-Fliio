@@ -1,4 +1,6 @@
 @extends('layouts.admin')
+@section('title', __('orders.create_order'))
+
 @section('content')
     <div class="p-6">
         {{-- Page Header --}}
@@ -26,6 +28,12 @@
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="bg-red-50 border border-red-200 text-red-600 p-4 rounded-lg mb-6">
+                {{ session('error') }}
             </div>
         @endif
 
@@ -102,7 +110,7 @@
 
                             <div>
                                 <label for="phone" class="block text-sm font-medium mb-2">
-                                    @lang('orders.phone') <span class="text-red-500">*</span>
+                                    @lang('app.phone') <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" name="phone" id="phone"
                                     class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg @error('phone') border-red-500 @enderror"
@@ -114,7 +122,7 @@
 
                             <div>
                                 <label for="city" class="block text-sm font-medium mb-2">
-                                    @lang('orders.city') <span class="text-red-500">*</span>
+                                    @lang('app.city') <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" name="city" id="city"
                                     class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg @error('city') border-red-500 @enderror"
@@ -126,7 +134,7 @@
 
                             <div>
                                 <label for="address" class="block text-sm font-medium mb-2">
-                                    @lang('orders.address') <span class="text-red-500">*</span>
+                                    @lang('app.address') <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" name="address" id="address"
                                     class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg @error('address') border-red-500 @enderror"
@@ -181,9 +189,9 @@
                                         class="product-select w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm">
                                         <option value="">@lang('orders.select_product')</option>
                                         @foreach ($products as $product)
-                                            <option value="{{ $product->id }}" data-price="{{ $product->sale_price }}"
+                                            <option value="{{ $product->id }}" data-price="{{ $product->price }}"
                                                 {{ ($item['product_id'] ?? '') == $product->id ? 'selected' : '' }}>
-                                                {{ $product->name }} ({{ number_format($product->sale_price, 2) }} EGP)
+                                                {{ $product->name }} ({{ number_format($product->price, 2) }} EGP)
                                             </option>
                                         @endforeach
                                     </select>
@@ -191,7 +199,7 @@
 
                                 <div>
                                     <label class="block text-xs font-medium mb-1">
-                                        @lang('orders.quantity')
+                                        @lang('app.quantity')
                                     </label>
                                     <input type="number" name="products[{{ $i }}][quantity]"
                                         class="item-quantity w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm"
@@ -200,7 +208,7 @@
 
                                 <div>
                                     <label class="block text-xs font-medium mb-1">
-                                        @lang('orders.price')
+                                        @lang('app.price')
                                     </label>
                                     <input type="number"
                                         class="item-price w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-lg text-sm"
@@ -235,15 +243,20 @@
                         <div class="w-full sm:w-72 bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-2 text-sm">
                             <div class="flex justify-between">
                                 <span class="text-gray-600">@lang('orders.subtotal')</span>
-                                <span id="summary-subtotal" class="font-medium">0.00 EGP</span>
+                                <span id="summary-subtotal" class="font-medium">0.00 @lang('app.currency')</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">@lang('orders.delivery_fee')</span>
+                                <span id="summary-delivery" class="font-medium">0.00 @lang('app.currency')</span>
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-gray-600">@lang('orders.discount')</span>
-                                <span id="summary-discount" class="font-medium text-red-500">- 0.00 EGP</span>
+                                <span id="summary-discount" class="font-medium text-red-500">- 0.00
+                                    @lang('app.currency')</span>
                             </div>
                             <div class="flex justify-between border-t border-gray-200 pt-2 text-base">
-                                <span class="font-semibold">@lang('orders.total')</span>
-                                <span id="summary-total" class="font-bold">0.00 EGP</span>
+                                <span class="font-semibold">@lang('app.total')</span>
+                                <span id="summary-total" class="font-bold">0.00 @lang('app.currency')</span>
                             </div>
                         </div>
                     </div>
@@ -270,6 +283,9 @@
                             </label>
                             <select name="payment_method" id="payment_method"
                                 class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg @error('payment_method') border-red-500 @enderror">
+                                <option value="">
+                                    @lang('app.select')
+                                </option>
                                 <option value="cash_on_delivery"
                                     {{ old('payment_method') == 'cash_on_delivery' ? 'selected' : '' }}>
                                     @lang('orders.cash_on_delivery')
@@ -294,7 +310,7 @@
                                 <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">EGP</span>
                                 <input type="number" name="discount" id="discount"
                                     class="w-full pl-12 pr-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg @error('discount') border-red-500 @enderror"
-                                    value="{{ old('discount', 0) }}" step="0.01" min="0">
+                                    value="{{ old('discount') }}" step="0.01" min="0" placeholder="0">
                             </div>
                             @error('discount')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -311,7 +327,7 @@
                                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
                                 </path>
                             </svg>
-                            @lang('orders.notes')
+                            @lang('app.notes')
                         </h3>
                     </div>
                     <div class="p-6">
@@ -353,8 +369,8 @@
                     class="product-select w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm">
                     <option value="">@lang('orders.select_product')</option>
                     @foreach ($products as $product)
-                        <option value="{{ $product->id }}" data-price="{{ $product->sale_price }}">
-                            {{ $product->name }} ({{ number_format($product->sale_price, 2) }} EGP)
+                        <option value="{{ $product->id }}" data-price="{{ $product->price }}">
+                            {{ $product->name }} ({{ number_format($product->price, 2) }} EGP)
                         </option>
                     @endforeach
                 </select>
@@ -362,7 +378,7 @@
 
             <div>
                 <label class="block text-xs font-medium mb-1">
-                    @lang('orders.quantity')
+                    @lang('app.quantity')
                 </label>
                 <input type="number" name="products[__INDEX__][quantity]"
                     class="item-quantity w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm"
@@ -371,7 +387,7 @@
 
             <div>
                 <label class="block text-xs font-medium mb-1">
-                    @lang('orders.price')
+                    @lang('app.price')
                 </label>
                 <input type="number"
                     class="item-price w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-lg text-sm"
@@ -400,54 +416,50 @@
         </div>
     </template>
 
+
     <script>
-        // ============================================
-        // ✅ 1. TOGGLE: عميل مسجل / عميل جديد
-        // ============================================
+        // TOGGLE: عميل مسجل / عميل جديد
         (function() {
+
             var existingSection = document.getElementById('existing_customer_section');
             var newSection = document.getElementById('new_customer_section');
+
             var radioExisting = document.getElementById('customer_type_existing');
             var radioNew = document.getElementById('customer_type_new');
 
-            // جميع الحقول في كل قسم
             var existingInputs = existingSection.querySelectorAll('input, select, textarea');
             var newInputs = newSection.querySelectorAll('input, select, textarea');
 
             function toggleCustomerType(type) {
+
                 if (type === 'existing') {
-                    // إظهار العميل المسجل
+
                     existingSection.classList.remove('hidden');
                     newSection.classList.add('hidden');
 
-                    // تفعيل حقول العميل المسجل
                     existingInputs.forEach(function(el) {
                         el.disabled = false;
                     });
 
-                    // تعطيل حقول العميل الجديد
                     newInputs.forEach(function(el) {
                         el.disabled = true;
                     });
 
                 } else {
-                    // إظهار العميل الجديد
+
                     existingSection.classList.add('hidden');
                     newSection.classList.remove('hidden');
 
-                    // تفعيل حقول العميل الجديد
                     newInputs.forEach(function(el) {
                         el.disabled = false;
                     });
 
-                    // تعطيل حقول العميل المسجل
                     existingInputs.forEach(function(el) {
                         el.disabled = true;
                     });
                 }
             }
 
-            // ربط الأحداث بالـ radio buttons
             radioExisting.addEventListener('change', function() {
                 if (this.checked) {
                     toggleCustomerType('existing');
@@ -460,132 +472,225 @@
                 }
             });
 
-            // ✅ تعطيل حقول العميل الجديد عند تحميل الصفحة (افتراضي عميل مسجل)
             newInputs.forEach(function(el) {
                 el.disabled = true;
             });
 
-            // ✅ دالة fillCustomerData متاحة عالمياً
             window.fillCustomerData = function(select) {
+
                 var option = select.options[select.selectedIndex];
-                if (option.value) {
-                    document.getElementById('customer_name').value = option.dataset.name || '';
-                    document.getElementById('phone').value = option.dataset.phone || '';
-                    document.getElementById('city').value = option.dataset.city || '';
-                    document.getElementById('address').value = option.dataset.address || '';
-                } else {
+
+                if (!option.value) {
+
                     document.getElementById('customer_name').value = '';
                     document.getElementById('phone').value = '';
                     document.getElementById('city').value = '';
                     document.getElementById('address').value = '';
+
+                    return;
                 }
+
+                document.getElementById('customer_name').value = option.dataset.name || '';
+                document.getElementById('phone').value = option.dataset.phone || '';
+                document.getElementById('city').value = option.dataset.city || '';
+                document.getElementById('address').value = option.dataset.address || '';
+
             };
 
-            // التأكد من أن الفورم مش هيتبعت بحقول معطلة
             document.querySelector('form').addEventListener('submit', function() {
-                // تفعيل كل الحقول المعطلة مؤقتاً عشان تتبعت
+
                 document.querySelectorAll('input, select, textarea').forEach(function(el) {
                     el.disabled = false;
                 });
+
             });
 
         })();
 
-        // ============================================
-        // ✅ 2. حساب المنتجات
-        // ============================================
+
+
+        // حساب المنتجات
         (function() {
+
             var itemsContainer = document.getElementById('order-items');
             var addBtn = document.getElementById('add-item-btn');
             var template = document.getElementById('order-item-template');
+
             var discountInput = document.getElementById('discount');
+            var paymentMethod = document.getElementById('payment_method');
+
             var itemIndex = itemsContainer.querySelectorAll('.order-item').length;
 
             function formatMoney(value) {
-                return value.toFixed(2) + ' EGP';
+                return Number(value).toFixed(2) + ' EGP';
+            }
+
+            function getDeliveryFee() {
+
+                if (!paymentMethod) {
+                    return 0;
+                }
+
+                switch (paymentMethod.value) {
+
+                    case 'cash_on_delivery':
+                        return 30;
+
+                    default:
+                        return 0;
+                }
+
             }
 
             function recalcRow(row) {
+
                 var select = row.querySelector('.product-select');
                 var qtyInput = row.querySelector('.item-quantity');
                 var priceInput = row.querySelector('.item-price');
                 var totalInput = row.querySelector('.item-total');
 
                 var option = select.options[select.selectedIndex];
-                var price = option && option.dataset.price ? parseFloat(option.dataset.price) : 0;
-                var qty = parseInt(qtyInput.value, 10) || 0;
+
+                var price = option.dataset.price ?
+                    parseFloat(option.dataset.price) : 0;
+
+                var qty = parseInt(qtyInput.value) || 0;
 
                 priceInput.value = price.toFixed(2);
                 totalInput.value = (price * qty).toFixed(2);
+
             }
 
             function recalcSummary() {
+
                 var subtotal = 0;
+
                 itemsContainer.querySelectorAll('.order-item').forEach(function(row) {
-                    subtotal += parseFloat(row.querySelector('.item-total').value) || 0;
+
+                    subtotal += parseFloat(
+                        row.querySelector('.item-total').value
+                    ) || 0;
+
                 });
 
                 var discount = parseFloat(discountInput.value) || 0;
-                if (discount > subtotal) discount = subtotal;
+
+                if (discount > subtotal) {
+                    discount = subtotal;
+                }
+
+                var delivery = getDeliveryFee();
+
+                var total = subtotal - discount + delivery;
 
                 document.getElementById('summary-subtotal').textContent = formatMoney(subtotal);
-                document.getElementById('summary-discount').textContent = '- ' + formatMoney(discount);
-                document.getElementById('summary-total').textContent = formatMoney(subtotal - discount);
+
+                document.getElementById('summary-discount').textContent =
+                    '- ' + formatMoney(discount);
+
+                document.getElementById('summary-delivery').textContent =
+                    formatMoney(delivery);
+
+                document.getElementById('summary-total').textContent =
+                    formatMoney(total);
+
             }
 
             function recalcAll() {
-                itemsContainer.querySelectorAll('.order-item').forEach(recalcRow);
+
+                itemsContainer
+                    .querySelectorAll('.order-item')
+                    .forEach(recalcRow);
+
                 recalcSummary();
+
             }
 
             function updateRemoveButtons() {
+
                 var rows = itemsContainer.querySelectorAll('.order-item');
+
                 rows.forEach(function(row) {
+
                     var btn = row.querySelector('.remove-item-btn');
-                    if (rows.length === 1) {
-                        btn.classList.add('hidden');
-                    } else {
-                        btn.classList.remove('hidden');
-                    }
+
+                    btn.classList.toggle('hidden', rows.length === 1);
+
                 });
+
             }
 
             addBtn.addEventListener('click', function() {
+
                 var html = template.innerHTML.replace(/__INDEX__/g, itemIndex++);
+
                 var wrapper = document.createElement('div');
+
                 wrapper.innerHTML = html.trim();
+
                 itemsContainer.appendChild(wrapper.firstElementChild);
+
                 updateRemoveButtons();
+
                 recalcSummary();
+
             });
 
             itemsContainer.addEventListener('click', function(e) {
+
                 var btn = e.target.closest('.remove-item-btn');
+
                 if (!btn) return;
+
                 btn.closest('.order-item').remove();
+
                 updateRemoveButtons();
+
                 recalcSummary();
+
             });
 
             itemsContainer.addEventListener('change', function(e) {
-                if (e.target.classList.contains('product-select') || e.target.classList.contains(
-                        'item-quantity')) {
-                    recalcRow(e.target.closest('.order-item'));
+
+                if (
+                    e.target.classList.contains('product-select') ||
+                    e.target.classList.contains('item-quantity')
+                ) {
+
+                    recalcRow(
+                        e.target.closest('.order-item')
+                    );
+
                     recalcSummary();
+
                 }
+
             });
 
             itemsContainer.addEventListener('input', function(e) {
+
                 if (e.target.classList.contains('item-quantity')) {
-                    recalcRow(e.target.closest('.order-item'));
+
+                    recalcRow(
+                        e.target.closest('.order-item')
+                    );
+
                     recalcSummary();
+
                 }
+
             });
 
             discountInput.addEventListener('input', recalcSummary);
 
+            if (paymentMethod) {
+                paymentMethod.addEventListener('change', recalcSummary);
+            }
+
             updateRemoveButtons();
+
             recalcAll();
+
         })();
     </script>
 @endsection

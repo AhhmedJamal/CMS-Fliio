@@ -48,6 +48,13 @@ class OrderController extends Controller
                 ->with('error', ' حدث خطأ: ' . $e->getMessage());
         }
     }
+
+    public function show($id)
+    {
+        $order = Order::with(['customer', 'items.product'])->findOrFail($id);
+        return view('orders.show', compact('order'));
+    }
+
     public function edit($id)
     {
         $order = Order::findOrFail($id);

@@ -1,4 +1,4 @@
-<aside class="w-48 text-white px-1.5 flex flex-col justify-between py-4"
+<aside class="w-52 text-white px-1.5 flex flex-col justify-between py-4"
     style="background-color: {{ $settings->get('primary_color') }}">
     @php
         $currentRoute = Route::currentRouteName();
@@ -27,6 +27,12 @@
                 'name' => __('dashboard.orders'),
                 'route' => route('orders.index'),
                 'icon' => 'fa-solid fa-cart-shopping',
+            ],
+
+            'customizations' => [
+                'name' => __('dashboard.customizations'),
+                'route' => route('customizations.index'),
+                'icon' => 'fa-solid fa-pen-to-square',
             ],
             'settings' => [
                 'name' => __('dashboard.settings'),

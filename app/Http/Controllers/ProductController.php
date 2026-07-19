@@ -52,12 +52,12 @@ class ProductController extends Controller
         // Product::create($request->validated());
         $this->productService->createProduct($request->validated());
 
-        return redirect()->route('products.index')->with('success', __('products.success_added'));
+        return redirect()->route('products.index')->with('success', __('app.success_added'));
     }
     public function edit(Product $product)
     {
         $categories = Category::orderBy('name')->get();
-        return view('products.edit', compact('product', 'categories'));
+        return view('app.edit', compact('product', 'categories'));
     }
 
 
@@ -67,13 +67,13 @@ class ProductController extends Controller
 
         return redirect()
             ->route('products.index')
-            ->with('success', __('products.success_updated'));
+            ->with('success', __('app.success_updated'));
     }
 
     public function destroy(Product $product)
     {
         $this->productService->deleteProduct($product);
-        return redirect()->route('products.index')->with('success', __('products.success_deleted'));
+        return redirect()->route('products.index')->with('success', __('app.success_deleted'));
     }
 
 }

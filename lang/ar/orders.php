@@ -3,13 +3,9 @@
 return [
     "order_code" => "كود الطلب",
     "customer_name" => "اسم العميل",
-    "phone" => "رقم الهاتف",
-    "city" => "المدينة",
-    "address" => "العنوان",
     "payment_method" => "طريقة الدفع",
     "discount" => "الخصم",
     "total_price" => "السعر الاجمالي",
-    "status" => "الحالة",
     "created_at" => "تاريخ الانشاء",
     "create_order" => "انشاء طلب",
     'select_at_least_one_product' => 'يرجى اختيار منتج واحد على الأقل.',
@@ -26,8 +22,6 @@ return [
     'select_product' => 'اختر المنتج',
     'add_product' => 'اضافة منتج',
     'customer_info' => 'معلومات العميل',
-    'quantity' => 'الكمية',
-    'price' => 'السعر',
     'order_summary' => 'ملخص الطلب',
     'enter_city' => 'ادخل المدينة',
     'enter_address' => 'ادخل العنوان',
@@ -39,7 +33,6 @@ return [
     'card' => 'البطاقة',
     'wallet' => 'المحفظة',
     'product' => 'المنتج',
-    'notes' => 'ملاحظات',
     'name_required' => 'الاسم مطلوب',
     'name_min' => 'الاسم يجب ان يكون 3 احرف على الاقل',
     'name_max' => 'الاسم يجب ان يكون 3 احرف على الاقل',
@@ -63,5 +56,6 @@ return [
     'select_customer'=>' اختيار العميل ',
     'customer_type'=>'نوع العميل ',
     'existing_customer'=>'عميل مسجل ',
-    'new_customer'=>'عميل جديد '
+    'new_customer'=>'عميل جديد ',
+    'delivery_fee' => 'رسوم التوصيل',
 ];
