@@ -8,4 +8,5 @@ return [
     'customer_updated_successfully' => 'Customer updated successfully',
     'customer_deleted_successfully' => 'Customer deleted successfully',
     'welcome_customers' => 'Welcome to the customers page',
+    'new_customers' => 'New Customers',
 ];

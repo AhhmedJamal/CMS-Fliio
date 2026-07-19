@@ -8,4 +8,6 @@ return [
     'customer_deleted_successfully' => 'تم حذف العميل بنجاح',
     'no_customers' => 'لا يوجد عملاء',
     'welcome_customers' => 'مرحبا بك في صفحة العملاء',
+    'new_customers' => 'العملاء الجدد',
+
 ];

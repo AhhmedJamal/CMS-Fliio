@@ -28,7 +28,6 @@
                 'route' => route('orders.index'),
                 'icon' => 'fa-solid fa-cart-shopping',
             ],
-
             'customizations' => [
                 'name' => __('dashboard.customizations'),
                 'route' => route('customizations.index'),

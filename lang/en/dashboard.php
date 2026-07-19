@@ -19,5 +19,8 @@ return [
     'welcome_customers' => 'Welcome Customers',
     "customizations" => 'Customizations',
     "welcome_customizations" => 'Welcome Customizations',
-
+    "average_order_value" => "Average Order Value",
+    "total_revenue" => "Total Revenue",
+    "total_orders" => "Total Orders",
+    
 ];
