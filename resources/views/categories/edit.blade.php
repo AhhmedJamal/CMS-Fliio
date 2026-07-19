@@ -1,20 +1,20 @@
 @extends('layouts.admin')
 
-@section('title', __('categories.edit', ['name' => $category->name]))
+@section('title', __('app.edit', ['name' => $category->name]))
 
 @section('content')
     {{-- Header --}}
     <div class="flex items-center justify-between mb-6">
         <div>
             <h1 class="text-2xl font-bold text-gray-800">
-                <i class="fas fa-edit text-primary"></i> {{ __('categories.edit', ['name' => $category->name]) }}
+                <i class="fas fa-edit text-primary"></i> {{ __('app.edit', ['name' => $category->name]) }}
             </h1>
             <p class="text-sm text-gray-500 mt-1">{{ __('categories.edit_description', ['name' => $category->name]) }}</p>
         </div>
         <a href="{{ route('categories.index') }}"
             class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
             <i class="fas fa-arrow-right"></i>
-            {{ __('categories.back_to_list') }}
+            {{ __('app.back_to_list') }}
         </a>
     </div>
 
@@ -29,7 +29,7 @@
                 {{-- Name --}}
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                        {{ __('categories.name') }}
+                        {{ __('app.name') }}
                     </label>
                     <input type="text" id="name" name="name" value="{{ old('name', $category->name) }}" required
                         class="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
@@ -41,7 +41,7 @@
                 {{-- Description --}}
                 <div>
                     <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
-                        {{ __('categories.description') }}
+                        {{ __('app.description') }}
                     </label>
                     <textarea id="description" name="description" rows="4"
                         class="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">{{ old('description', $category->description) }}</textarea>
@@ -53,7 +53,7 @@
                 {{-- Image Upload --}}
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">
-                        {{ __('categories.image') }}
+                        {{ __('app.image') }}
                     </label>
                     <div class="flex items-center gap-4">
                         @if ($category->image)
@@ -97,9 +97,9 @@
                         <label for="is_active" class="text-sm font-medium text-gray-700">
                             {{ __('categories.is_active') }}
                             @if ($category->is_active)
-                                <span class="text-green-600">({{ __('categories.status_active') }})</span>
+                                <span class="text-green-600">({{ __('app.active') }})</span>
                             @else
-                                <span class="text-red-600">({{ __('categories.status_inactive') }})</span>
+                                <span class="text-red-600">({{ __('app.inactive') }})</span>
                             @endif
                         </label>
                     </div>
@@ -118,7 +118,7 @@
                     <button type="reset"
                         class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition">
                         <i class="fas fa-undo"></i>
-                        {{ __('categories.reset') }}
+                        {{ __('app.reset') }}
                     </button>
                 </div>
             </form>
@@ -158,7 +158,7 @@
                     {{-- Preview Info --}}
                     <div class="space-y-3">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">{{ __('categories.name') }}</label>
+                            <label class="block text-sm font-medium text-gray-700">{{ __('app.name') }}</label>
                             <p class="text-gray-800 font-semibold" id="preview-name">{{ $category->name }}</p>
                         </div>
                         <div>
@@ -169,9 +169,9 @@
                             <label class="block text-sm font-medium text-gray-700">{{ __('categories.status') }}</label>
                             <p class="text-sm" id="preview-status">
                                 @if ($category->is_active)
-                                    <span class="text-green-600 font-medium">{{ __('categories.status_active') }}</span>
+                                    <span class="text-green-600 font-medium">{{ __('app.active') }}</span>
                                 @else
-                                    <span class="text-red-600 font-medium">{{ __('categories.status_inactive') }}</span>
+                                    <span class="text-red-600 font-medium">{{ __('app.inactive') }}</span>
                                 @endif
                             </p>
                         </div>
@@ -273,10 +273,10 @@
                 statusCheckbox.addEventListener('change', function(e) {
                     if (e.target.checked) {
                         previewStatus.innerHTML =
-                            `<span class="text-green-600 font-medium">{{ __('categories.status_active') }}</span>`;
+                            `<span class="text-green-600 font-medium">{{ __('app.active') }}</span>`;
                     } else {
                         previewStatus.innerHTML =
-                            `<span class="text-red-600 font-medium">{{ __('categories.status_inactive') }}</span>`;
+                            `<span class="text-red-600 font-medium">{{ __('app.inactive') }}</span>`;
                     }
                 });
             }

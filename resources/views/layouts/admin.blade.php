@@ -21,7 +21,7 @@
 
         @include('partials.sidebar')
 
-        <div class="p-6 flex-1 scrollbar-thumb-primary  "
+        <div class="p-4 flex-1 scrollbar-thumb-primary"
             style="background-color: {{ $settings->get('primary_color') }}; color:{{ $settings->get('text_color') }} ">
             <div class="flex-1 rounded-2xl overflow-y-auto h-full"
                 style="background-color: {{ $settings->get('background_color') }}">

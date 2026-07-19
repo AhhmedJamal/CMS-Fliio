@@ -15,15 +15,15 @@
         <div class="bg-white rounded-lg p-1 border border-gray-200 w-1/2">
             <form method="GET" action="{{ route('products.index') }}" class="flex flex-wrap gap-3">
                 <div class="flex-1 min-w-[200px]">
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="{{ __('products.search_placeholder') }}"
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="{{ __('app.search_placeholder') }}"
                         class="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                 </div>
                 <button type="submit" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg transition">
-                    <i class="fas fa-search"></i> {{ __('products.search') }}
+                    <i class="fas fa-search"></i> {{ __('app.search') }}
                 </button>
                 <a href="{{ route('products.index') }}"
                     class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition">
-                    <i class="fas fa-redo"></i> {{ __('products.reset') }}
+                    <i class="fas fa-redo"></i> {{ __('app.reset') }}
                 </a>
             </form>
         </div>
@@ -107,10 +107,10 @@
                                 class="flex items-center gap-2 px-2 py-1 text-xs font-medium rounded {{ $product->is_active ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-600' }}">
                                 @if ($product->is_active)
                                     <i class="fa-solid fa-circle text-[8px]"></i>
-                                    <span>{{ __('products.status_active') }}</span>
+                                    <span>{{ __('app.active') }}</span>
                                 @else
                                     <i class="fa-solid fa-circle text-[8px]"></i>
-                                    <span>{{ __('products.status_inactive') }}</span>
+                                    <span>{{ __('app.inactive') }}</span>
                                 @endif
                             </span>
                         </div>
@@ -134,28 +134,28 @@
                         {{-- Price --}}
                         <div class="flex items-end gap-2 mt-2 mb-3 relative">
                             <span class="text-xl font-bold text-primary">{{ number_format($product->price, 2) }}
-                                {{ __('products.currency') }}</span>
+                                {{ __('app.currency') }}</span>
                             @if ($product->compare_price)
                                 <span
                                     class="text-sm text-gray-400 line-through ">{{ number_format($product->compare_price, 2) }}
-                                    {{ __('products.currency') }}</span>
+                                    {{ __('app.currency') }}</span>
                                 <span
                                     class="absolute rtl:left-0 ltr:right-0 text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full">-{{ $product->discount_percentage }}%</span>
                             @endif
                         </div>
                         {{-- Actions --}}
                         <div class="grid grid-cols-2 items-center gap-2 pt-3 border-t border-gray-100">
-                            <a href="{{ route('products.edit', $product) }}"
+                            <a href="{{ route('app.edit', $product) }}"
                                 class="flex-1 bg-gray-100 hover:bg-green-100 hover:text-green-500 text-primary text-center px-3 py-1.5 rounded-lg text-sm transition border border-gray-200">
-                                <i class="fas fa-edit"></i> {{ __('products.edit') }}
+                                <i class="fas fa-edit"></i> {{ __('app.edit') }}
                             </a>
                             <form action="{{ route('products.destroy', $product->id) }}" method="POST"
-                                onsubmit="return confirm('{{ __('products.confirm_delete') }}')" class="flex-1">
+                                onsubmit="return confirm('{{ __('app.confirm_delete') }}')" class="flex-1">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
                                     class="w-full bg-gray-100 hover:bg-red-100 hover:text-red-500 text-primary text-center px-3 py-1.5 rounded-lg text-sm transition border border-gray-200">
-                                    <i class="fas fa-trash"></i> {{ __('products.delete') }}
+                                    <i class="fas fa-trash"></i> {{ __('app.delete') }}
                                 </button>
                             </form>
                         </div>

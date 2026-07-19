@@ -8,6 +8,12 @@ return [
     "total_price" => "Total price",
     "created_at" => "Created at",
     "create_order" => "Create order",
+    "create_section" => "Create section",
+    "section_name" => "Section Name",
+    "section_image" => "Section image",
+    "create_type" => "Create type",
+    "type_name" => "Type Name",
+    "type_image" => "Type Image",
     'select_at_least_one_product' => 'Please select at least one product.',
     'enter_valid_quantity' => 'Please enter a valid quantity for the selected product.',
     'confirm_remove_item' => 'Are you sure you want to remove this item?',
@@ -59,4 +65,6 @@ return [
     'existing_customer' => 'existing customer ',
     'new_customer' => 'new customer ',
     'delivery_fee' => 'delivery fee',
+    "customizations"=> 'Customizations',
+
 ];

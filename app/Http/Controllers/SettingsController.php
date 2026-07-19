@@ -61,7 +61,7 @@ class SettingsController extends Controller
         Cache::forget('settings');
         $this->settingsService->refresh();
 
-        return back()->with('success', __('settings.success_saved'));
+        return back()->with('success', __('app.success_saved'));
     }
 
     private function getGroup($field)

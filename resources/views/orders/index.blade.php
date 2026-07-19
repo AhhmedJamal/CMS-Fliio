@@ -22,7 +22,7 @@
                 <h2 class="text-3xl font-bold text-gray-800 ">
                     @lang('dashboard.welcome_orders')
                 </h2>
-                <a href="{{ route('orders.create') }}" class="py-2 px-4 rounded-lg bg-amber-500 text-white">@lang('orders.create_order')</a>
+                <a href="{{ route('orders.create') }}" class="py-2 px-4 rounded-lg bg-primary text-white">@lang('orders.create_order')</a>
             </div>
         </div>
 
@@ -39,13 +39,13 @@
                             <th class="px-6 py-4">#</th>
                             <th class="px-6 py-4">@lang('orders.order_code')</th>
                             <th class="px-6 py-4">@lang('orders.customer_name')</th>
-                            <th class="px-6 py-4">@lang('orders.phone')</th>
-                            <th class="px-6 py-4">@lang('orders.city')</th>
-                            <th class="px-6 py-4">@lang('orders.address')</th>
+                            <th class="px-6 py-4">@lang('app.phone')</th>
+                            <th class="px-6 py-4">@lang('app.city')</th>
+                            <th class="px-6 py-4">@lang('app.address')</th>
                             <th class="px-6 py-4">@lang('orders.payment_method')</th>
                             <th class="px-6 py-4">@lang('orders.discount')</th>
                             <th class="px-6 py-4">@lang('orders.total_price')</th>
-                            <th class="px-6 py-4">@lang('orders.status')</th>
+                            <th class="px-6 py-4">@lang('app.status')</th>
                             <th class="px-6 py-4">@lang('orders.created_at')</th>
 
                         </tr>
@@ -60,8 +60,10 @@
                                     {{ $order->id }}
                                 </td>
 
-                                <td class="px-6 py-4">
-                                    #{{ $order->order_code }}
+                                <td class="px-6 py-4 underline">
+                                    <a href="{{ route('orders.show', $order->id) }}">
+                                        #{{ $order->order_code }}
+                                    </a>
                                 </td>
 
                                 <td class="px-6 py-4">

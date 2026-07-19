@@ -16,7 +16,7 @@
             </div>
             <a href="{{ route('products.index') }}"
                 class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition flex items-center gap-2">
-                <i class="fas fa-arrow-right"></i> {{ __('products.back_to_list') }}
+                <i class="fas fa-arrow-right"></i> {{ __('app.back_to_list') }}
             </a>
         </div>
 
@@ -28,7 +28,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {{-- الاسم --}}
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('products.name') }} *</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('app.name') }} *</label>
                     <input type="text" name="name" value="{{ old('name', $product->name) }}"
                         class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent @error('name') border-red-500 @enderror">
                     @error('name')
@@ -38,7 +38,7 @@
 
                 {{-- السعر --}}
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('products.price') }} *</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('app.price') }} *</label>
                     <input type="number" name="price" step="0.01" value="{{ old('price', $product->price) }}"
                         class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent @error('price') border-red-500 @enderror">
                     @error('price')
@@ -59,7 +59,7 @@
 
                 {{-- الكمية --}}
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('products.quantity') }} *</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('app.quantity') }} *</label>
                     <input type="number" name="quantity" value="{{ old('quantity', $product->quantity) }}"
                         class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent @error('quantity') border-red-500 @enderror">
                     @error('quantity')
@@ -67,7 +67,7 @@
                     @enderror
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('products.category') }}</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('app.category') }}</label>
                     <select name="category_id"
                         class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent @error('category_id') border-red-500 @enderror">
                         <option value="">{{ __('products.no_category') }}</option>
@@ -84,7 +84,7 @@
                 </div>
                 {{-- الوصف --}}
                 <div class="md:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('products.description') }}</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('app.description') }}</label>
                     <textarea name="description" rows="4"
                         class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:border-transparent @error('description') border-red-500 @enderror">{{ old('description', $product->description) }}</textarea>
                     @error('description')
@@ -136,7 +136,7 @@
                 </button>
                 <a href="{{ route('products.index') }}"
                     class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-2.5 rounded-lg transition">
-                    {{ __('products.cancel') }}
+                    {{ __('app.cancel') }}
                 </a>
             </div>
         </form>

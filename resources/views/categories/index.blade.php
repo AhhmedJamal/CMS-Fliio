@@ -77,15 +77,15 @@
         <form method="GET" action="{{ route('categories.index') }}" class="flex flex-wrap gap-3">
             <div class="flex-1 min-w-[200px]">
                 <input type="text" name="search" value="{{ request('search') }}"
-                    placeholder="{{ __('categories.search_placeholder') }}"
+                    placeholder="{{ __('app.search_placeholder') }}"
                     class="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
             </div>
             <button type="submit" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg transition">
-                <i class="fas fa-search"></i> {{ __('categories.search') }}
+                <i class="fas fa-search"></i> {{ __('app.search') }}
             </button>
             <a href="{{ route('categories.index') }}"
                 class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition">
-                <i class="fas fa-redo"></i> {{ __('categories.reset') }}
+                <i class="fas fa-redo"></i> {{ __('app.reset') }}
             </a>
         </form>
     </div>
@@ -111,7 +111,7 @@
                         <div class="absolute top-2 left-2">
                             <span
                                 class="px-2 py-1 text-xs font-medium rounded-full {{ $category->is_active ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-600' }}">
-                                {{ $category->is_active ? __('categories.status_active') : __('categories.status_inactive') }}
+                                {{ $category->is_active ? __('app.active') : __('app.inactive') }}
                             </span>
                         </div>
 
@@ -133,9 +133,9 @@
                                 </div>
                                 <div class="flex items-center gap-1">
                                     @if ($category->is_active)
-                                        <span class="text-xs text-green-600">● {{ __('categories.status_active') }}</span>
+                                        <span class="text-xs text-green-600">● {{ __('app.active') }}</span>
                                     @else
-                                        <span class="text-xs text-red-600">● {{ __('categories.status_inactive') }}</span>
+                                        <span class="text-xs text-red-600">● {{ __('app.inactive') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -147,17 +147,17 @@
 
                         {{-- Actions --}}
                         <div class="grid grid-cols-2 items-center gap-2 pt-3">
-                            <a href="{{ route('categories.edit', $category) }}"
+                            <a href="{{ route('app.edit', $category) }}"
                                 class="flex-1 bg-gray-100 hover:bg-green-100 hover:text-green-500 text-primary text-center px-3 py-1.5 rounded-lg text-sm transition border border-gray-200">
-                                <i class="fas fa-edit"></i> {{ __('categories.edit') }}
+                                <i class="fas fa-edit"></i> {{ __('app.edit') }}
                             </a>
                             <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="flex-1"
-                                onsubmit="return confirm('{{ __('categories.confirm_delete') }}')">
+                                onsubmit="return confirm('{{ __('app.confirm_delete') }}')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
                                     class="w-full bg-gray-100 hover:bg-red-100 hover:text-red-500 text-primary text-center px-3 py-1.5 rounded-lg text-sm transition border border-gray-200">
-                                    <i class="fas fa-trash"></i> {{ __('categories.delete') }}
+                                    <i class="fas fa-trash"></i> {{ __('app.delete') }}
                                 </button>
                             </form>
                         </div>
@@ -175,7 +175,7 @@
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
             <i class="fas fa-tags text-6xl text-gray-300 mb-4"></i>
             @if (request('search'))
-                <h3 class="text-xl font-semibold text-gray-700 mb-2">{{ __('categories.no_results') }}</h3>
+                <h3 class="text-xl font-semibold text-gray-700 mb-2">{{ __('app.no_results') }}</h3>
                 <p class="text-gray-500 mb-4">{{ __('categories.no_results_desc') }}
                     "<strong>{{ request('search') }}</strong>"</p>
                 <a href="{{ route('categories.index') }}"

@@ -40,12 +40,12 @@ class CategoryController extends Controller
 
         return redirect()
             ->route('categories.index')
-            ->with('success', __('categories.success_added'));
+            ->with('success', __('app.success_added'));
     }
 
     public function edit(Category $category)
     {
-        return view('categories.edit', compact('category'));
+        return view('app.edit', compact('category'));
     }
 
     public function update(Request $request, Category $category)
@@ -62,7 +62,7 @@ class CategoryController extends Controller
 
         return redirect()
             ->route('categories.index')
-            ->with('success', __('categories.success_updated'));
+            ->with('success', __('app.success_updated'));
     }
 
     public function destroy(Category $category)
@@ -71,6 +71,6 @@ class CategoryController extends Controller
 
         return redirect()
             ->route('categories.index')
-            ->with('success', __('categories.success_deleted'));
+            ->with('success', __('app.success_deleted'));
     }
 }
