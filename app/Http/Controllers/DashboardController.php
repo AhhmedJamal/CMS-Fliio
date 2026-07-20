@@ -7,7 +7,6 @@ use App\Models\Customer;
 use App\Models\Order;
 use Carbon\Carbon;
 
-
 class DashboardController extends Controller
 {
     public function index()
@@ -19,7 +18,25 @@ class DashboardController extends Controller
             Carbon::now()->startOfWeek(),
             Carbon::now()->endOfWeek(),
         ])->count();
-        return view('dashboard.index', compact('averageOrderValue', 'customers', 'totalRevenue', 'totalOrders'));
-    }
 
+        $monthlyRevenue = Order::selectRaw('MONTH(created_at) as month, SUM(total_price) as revenue')
+            ->whereYear('created_at', date('Y'))
+            ->groupBy('month')
+            ->pluck('revenue', 'month')
+            ->toArray();
+
+        $monthlyData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $monthlyData[] = $monthlyRevenue[$i] ?? 0;
+        }
+        
+        return view('dashboard.index', compact(
+            'averageOrderValue', 
+            'customers', 
+            'totalRevenue', 
+            'totalOrders', 
+            'monthlyData', 
+            'monthlyRevenue'
+        ));
+    }
 }
